@@ -74,6 +74,20 @@ namespace Kata.Spec
         private static Calculator _systemUnderTest;
         private static int _result;
     }
+
+    public class when_user_input_contains_new_line_character
+    {
+        Establish _context = () =>
+        {
+            _systemUnderTest = new Calculator();
+        };
+
+        Because of = () => { _result = _systemUnderTest.Add("1\n2,3"); };
+
+        It should_return_the_sum_of_all_numbers = () => { _result.Should().Be(6); };
+        private static Calculator _systemUnderTest;
+        private static int _result;
+    }
 }
 
 
