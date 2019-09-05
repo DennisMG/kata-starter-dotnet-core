@@ -115,6 +115,20 @@ namespace Kata.Spec
         private static Exception _result;
         private static Calculator _systemUnderTest;
     }
+
+    public class when_input_contains_multiple_negative_numbers
+    {
+        Establish _context = () =>
+        {
+            _systemUnderTest = new Calculator();
+        };
+
+        Because of = () => { _result = Catch.Exception(() => _systemUnderTest.Add("-1,2,-3")); };
+
+        It should_throw_exception = () => { _result.Message.Should().Be("negatives not allowed: -1, -3"); };
+        private static Calculator _systemUnderTest;
+        private static Exception _result;
+    }
 }
 
 /*
