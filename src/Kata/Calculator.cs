@@ -10,7 +10,7 @@ namespace Kata
             if (input.Length > 1)
             {
                 var numbers = input.Split(',').Select(int.Parse);
-                return numbers.First() + numbers.Last();
+                return numbers.Sum();
             }
 
             return int.Parse(input);
