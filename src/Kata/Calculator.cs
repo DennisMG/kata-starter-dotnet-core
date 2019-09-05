@@ -21,7 +21,7 @@ namespace Kata
                 var numbers = stringInput.Split(delimiters, StringSplitOptions.None).Select(int.Parse);
                 var negative = numbers.Where(number => number < 0).ToArray();
                 if(negative.Any()) throw new Exception($"negatives not allowed: {string.Join(", ", negative)}"); 
-                return numbers.Sum();
+                return numbers.Where(number => number <= 1000).Sum();
             }
 
             return int.Parse(input);
