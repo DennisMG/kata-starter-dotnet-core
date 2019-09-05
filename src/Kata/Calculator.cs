@@ -15,7 +15,7 @@ namespace Kata
                 if (input.StartsWith("//"))
                 {
                     var parts = input.Split("\n");
-                    delimiters = new[] {parts[0].Replace("//", "").Replace("[","").Replace("]","")};
+                    delimiters = parts[0].Replace("//", "").Replace("[","").Split(']');
                     stringInput = parts[1];
                 }
                 var numbers = stringInput.Split(delimiters, StringSplitOptions.None).Select(int.Parse);
