@@ -19,8 +19,8 @@ namespace Kata
                     stringInput = parts[1];
                 }
                 var numbers = stringInput.Split(delimiters, StringSplitOptions.None).Select(int.Parse);
-                var negative = numbers.Where(number => number < 0);
-                if(negative.Any()) throw new Exception("negatives not allowed: -3"); 
+                var negative = numbers.Where(number => number < 0).ToArray();
+                if(negative.Any()) throw new Exception($"negatives not allowed: {string.Join(", ", negative)}"); 
                 return numbers.Sum();
             }
 
