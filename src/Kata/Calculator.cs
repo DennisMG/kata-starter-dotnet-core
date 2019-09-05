@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Kata
 {
     public class Calculator
@@ -5,7 +7,14 @@ namespace Kata
         public int Add(string input="")
         {
             if (string.IsNullOrEmpty(input)) return 0;
+            if (input.Length > 1)
+            {
+                var numbers = input.Split(',').Select(int.Parse);
+                return numbers.First() + numbers.Last();
+            }
+
             return int.Parse(input);
+
         }
     }
 }
