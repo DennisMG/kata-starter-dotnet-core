@@ -11,19 +11,35 @@ public class Calculator
         var newInput = input;
         if (input.StartsWith("//"))
         {
-            var parts = input.Split('\n');
-            delimiters = new[] { parts[0].Replace("//", "").Replace("[", "").Replace("]","")};
-            newInput = parts[1];
+            delimiters = GetCustomDelimiters(input, out newInput);
         }
         
-        var numbers = newInput.Split(delimiters, StringSplitOptions.None).Select(int.Parse).Where(x=> x <=1000).ToArray();
+        var numbers = getValidNumbers(newInput, delimiters);
 
+        validateNegatives(numbers);
+        return numbers.Sum();
+    }
+
+    private static void validateNegatives(int[] numbers)
+    {
         var negatives = numbers.Where(x => x < 0).ToArray();
         if (negatives.Any())
         {
             throw new Exception($"negatives not allowed: {string.Join(", ", negatives)}");
         }
-        if (numbers.Count() == 1) return numbers.First();
-        return numbers.Sum();
+    }
+
+    private static string[] GetCustomDelimiters(string input, out string newInput)
+    {
+        string[] delimiters;
+        var parts = input.Split('\n');
+        delimiters = parts[0].Replace("//", "").Replace("[", "").Split("]");
+        newInput = parts[1];
+        return delimiters;
+    }
+
+    private static int[] getValidNumbers(string newInput, string[] delimiters)
+    {
+        return newInput.Split(delimiters, StringSplitOptions.None).Select(int.Parse).Where(x=> x <=1000).ToArray();
     }
 }
