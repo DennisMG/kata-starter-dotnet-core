@@ -20,7 +20,7 @@ public class Calculator
         var negatives = numbers.Where(x => x < 0).ToArray();
         if (negatives.Any())
         {
-            throw new Exception($"negatives not allowed: {negatives.First()}");
+            throw new Exception($"negatives not allowed: {string.Join(", ", negatives)}");
         }
         if (numbers.Count() == 1) return numbers.First();
         return numbers.Sum();
