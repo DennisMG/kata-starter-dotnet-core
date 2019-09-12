@@ -12,7 +12,7 @@ public class Calculator
         if (input.StartsWith("//"))
         {
             var parts = input.Split('\n');
-            delimiters = new[] { parts[0].Replace("//", "")};
+            delimiters = new[] { parts[0].Replace("//", "").Replace("[", "").Replace("]","")};
             newInput = parts[1];
         }
         
