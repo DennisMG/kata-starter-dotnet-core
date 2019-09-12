@@ -16,6 +16,12 @@ public class Calculator
             newInput = parts[1];
         }
         var numbers = newInput.Split(delimiters, StringSplitOptions.None).Select(int.Parse).ToArray();
+
+        var negatives = numbers.Where(x => x < 0).ToArray();
+        if (negatives.Any())
+        {
+            throw new Exception($"negatives not allowed: {negatives.First()}");
+        }
         if (numbers.Count() == 1) return numbers.First();
         return numbers.Sum();
     }
