@@ -2,6 +2,6 @@ public class Calculator
 {
     public int Add(string input= "")
     {
-        return 0;
+        return string.IsNullOrEmpty(input) ? 0 : int.Parse(input);
     }
 }
