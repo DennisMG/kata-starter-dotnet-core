@@ -20,7 +20,11 @@ namespace Kata
                 
                 inputString = inputParts[1];
                 
-                delimiters = new[] {inputParts[0].Replace("//", "")};
+                delimiters = new[] {inputParts[0]
+                    .Replace("//", "")
+                    .Replace("[","")
+                    .Replace("]","")
+                };
             }
             
             var numbers = inputString.Split(delimiters, StringSplitOptions.None).Select(int.Parse).Where(x => x <= 1000);
