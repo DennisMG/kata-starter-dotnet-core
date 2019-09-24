@@ -16,25 +16,40 @@ namespace Kata
             var inputString = input;
             if (input.StartsWith("//"))
             {
-                var inputParts = input.Split("\n");
-                
-                inputString = inputParts[1];
-                
-                delimiters = new[] {inputParts[0]
-                    .Replace("//", "")
-                    .Replace("[","")
-                    .Replace("]","")
-                };
+                inputString = parseDelimiters(input, out delimiters);
             }
             
-            var numbers = inputString.Split(delimiters, StringSplitOptions.None).Select(int.Parse).Where(x => x <= 1000);
+            var numbers = getNumbers(inputString, delimiters);
             
-            var negatives = numbers.Where(number => number < 0);
-            
-            if( negatives.Any()) throw new Exception($"negatives not allowed: {string.Join(", ", negatives)}");
-            
-            if (numbers.Count() > 1) return numbers.Sum();
-            return numbers.First();
+            validateNegatives(numbers);
+
+            return numbers.Sum();
+        }
+
+        private static int[] getNumbers(string inputString, string[] delimiters)
+        {
+            return inputString.Split(delimiters, StringSplitOptions.None).Select(int.Parse).Where(x => x <= 1000).ToArray();
+        }
+
+        private static string parseDelimiters(string input, out string[] delimiters)
+        {
+            string inputString;
+            var inputParts = input.Split("\n");
+
+            inputString = inputParts[1];
+
+            delimiters = inputParts[0]
+                .Replace("//", "")
+                .Replace("[", "")
+                .Split("]");
+            return inputString;
+        }
+
+        private static void validateNegatives(int[] numbers)
+        {
+            var negatives = numbers.Where(number => number < 0).ToArray();
+
+            if (negatives.Any()) throw new Exception($"negatives not allowed: {string.Join(", ", negatives)}");
         }
     }
 }
