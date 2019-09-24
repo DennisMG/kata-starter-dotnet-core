@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Kata
 {
     public class Calculator
@@ -8,7 +10,10 @@ namespace Kata
             {
                 return 0;
             }
-            return int.Parse(input);
+
+            var numbers = input.Split(",").Select(int.Parse);
+            if(numbers.Count() > 1) return numbers.First() + numbers.Last();
+            return numbers.First();
         }
     }
 }
