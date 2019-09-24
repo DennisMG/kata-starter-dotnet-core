@@ -23,8 +23,8 @@ namespace Kata
                 delimiters = new[] {inputParts[0].Replace("//", "")};
             }
             
-            var numbers = inputString.Split(delimiters, StringSplitOptions.None).Select(int.Parse);
-
+            var numbers = inputString.Split(delimiters, StringSplitOptions.None).Select(int.Parse).Where(x => x <= 1000);
+            
             var negatives = numbers.Where(number => number < 0);
             
             if( negatives.Any()) throw new Exception($"negatives not allowed: {string.Join(", ", negatives)}");
