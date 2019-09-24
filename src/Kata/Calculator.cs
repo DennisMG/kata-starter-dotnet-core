@@ -4,7 +4,7 @@ namespace Kata
 {
     public class Calculator
     {
-        public int Add(string input="")
+        public int Add(string input = "")
         {
             if (string.IsNullOrEmpty(input))
             {
@@ -12,7 +12,7 @@ namespace Kata
             }
 
             var numbers = input.Split(",").Select(int.Parse);
-            if(numbers.Count() > 1) return numbers.First() + numbers.Last();
+            if (numbers.Count() > 1) return numbers.Sum();
             return numbers.First();
         }
     }
