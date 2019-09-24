@@ -27,7 +27,7 @@ namespace Kata
 
             var negatives = numbers.Where(number => number < 0);
             
-            if( negatives.Any()) throw new Exception("negatives not allowed: -3");
+            if( negatives.Any()) throw new Exception($"negatives not allowed: {string.Join(", ", negatives)}");
             
             if (numbers.Count() > 1) return numbers.Sum();
             return numbers.First();
