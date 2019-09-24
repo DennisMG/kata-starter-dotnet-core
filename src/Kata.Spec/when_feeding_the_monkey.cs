@@ -32,6 +32,20 @@ namespace Kata.Spec
 
    
 }
+
+    public class when_input_is_one_number
+    {
+        Establish _context = () =>
+        {
+            _systemUnderTest = new Calculator();
+        };
+
+        Because of = () => { _result = _systemUnderTest.Add("3"); };
+
+        It should_return_the_same_number = () => { _result.Should().Be(3); };
+        private static Calculator _systemUnderTest;
+        private static int _result;
+    }
 }
 
 /*
